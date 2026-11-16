@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account | MDRRMO Los Baños</title>
+  <link rel="icon" href="images/logo.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+  <script>try{var t=localStorage.getItem("mdrrmo-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+</head>
+<body class="login-page register-page">
+  <div id="progress"></div>
+
+  <div class="topbar">
+    <div class="container">
+      <span><span class="siren">🚨</span> <strong>Emergency Hotline:</strong> <a href="tel:">(0977) 204 9641</a></span>
+      <span>Los Baños, Laguna • Open 24/7</span>
+    </div>
+  </div>
+
+  <main>
+    <section class="auth-section">
+      <div class="blob blob-1" aria-hidden="true"></div>
+      <div class="blob blob-2" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="auth-card login-card">
+
+          <!-- Left panel -->
+          <aside class="auth-side">
+            <div class="beacon" aria-hidden="true">
+              <span class="ring"></span><span class="ring"></span><span class="ring"></span>
+              <span class="dash"></span>
+              <img src="images/logo.png" alt="MDRRMO Los Baños logo">
+            </div>
+            <h2>Join the community</h2>
+            <p>Create an account and be part of a safer, more prepared Los Baños.</p>
+            <ul>
+              <li>📢 Receive advisories for your barangay</li>
+              <li>🎓 Sign up for trainings and drills</li>
+              <li>🤝 Apply as a community volunteer</li>
+            </ul>
+          </aside>
+
+          <!-- Right panel -->
+          <div class="auth-form">
+            <h1 class="stagger" style="--i:0">Create Account</h1>
+            <p class="sub stagger" style="--i:1">Fill in your details to get started.</p>
+
+            <div class="form-alert" id="registerAlert" role="alert" aria-live="polite"></div>
+
+            <form id="registerForm" novalidate>
+              <div class="form-row">
+                <div class="field" id="f-name">
+                  <label for="regName">Full Name</label>
+                  <div class="input-wrap"><span class="ico" aria-hidden="true">👤</span>
+                    <input type="text" id="regName" placeholder="Juan Dela Cruz" autocomplete="name"></div>
+                  <span class="error">Please enter your full name.</span>
+                </div>
+                <div class="field" id="f-email">
+                  <label for="regEmail">Email</label>
+                  <div class="input-wrap"><span class="ico" aria-hidden="true">✉️</span>
+                    <input type="email" id="regEmail" placeholder="you@example.com" autocomplete="email"></div>
+                  <span class="error">Please enter a valid email address.</span>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="field" id="f-phone">
+                  <label for="regPhone">Phone <small>(optional)</small></label>
+                  <div class="input-wrap"><span class="ico" aria-hidden="true">📞</span>
+                    <input type="tel" id="regPhone" placeholder="09XX XXX XXXX" autocomplete="tel"></div>
+                  <span class="error">Please enter a valid phone number.</span>
+                </div>
+                <div class="field" id="f-barangay">
+                  <label for="regBarangay">Barangay</label>
+                  <div class="input-wrap"><span class="ico" aria-hidden="true">📍</span>
+                    <select id="regBarangay">
+                    <option value="">Select your barangay</option>
+                    <option>Anos</option>
+                    <option>Bagong Silang</option>
+                    <option>Bambang</option>
+                    <option>Batong Malake</option>
+                    <option>Baybayin</option>
+                    <option>Bayog</option>
+                    <option>Lalakay</option>
+                    <option>Maahas</option>
+                    <option>Malinta</option>
+                    <option>Mayondon</option>
+                    <option>Putho-Tuntungin</option>
+                    <option>San Antonio</option>
+                    <option>Tadlac</option>
+                    <option>Timugan</option>
+                    </select></div>
+                  <span class="error">Please select your barangay.</span>
+                </div>
+              </div>
+
+              <div class="field" id="f-password">
+                <label for="regPassword">Password</label>
+                <div class="input-wrap pw-wrap"><span class="ico" aria-hidden="true">🔒</span>
+                  <input type="password" id="regPassword" placeholder="At least 8 characters" autocomplete="new-password">
+                  <button type="button" class="pw-toggle" data-target="regPassword" aria-label="Show password">👁️</button></div>
+                <div class="strength"><div class="strength-bar" id="strengthBar"></div></div>
+                <span class="strength-text" id="strengthText">Use 8+ characters with letters and numbers.</span>
+                <span class="error">Password needs 8+ characters with letters and numbers.</span>
+              </div>
+
+              <div class="field" id="f-confirm">
+                <label for="regConfirm">Confirm Password</label>
+                <div class="input-wrap pw-wrap"><span class="ico" aria-hidden="true">🔒</span>
+                  <input type="password" id="regConfirm" placeholder="Re-enter your password" autocomplete="new-password">
+                  <button type="button" class="pw-toggle" data-target="regConfirm" aria-label="Show password">👁️</button></div>
+                <span class="error">Passwords do not match.</span>
+              </div>
+
+              <div class="field" id="f-terms">
+                <label class="check-row"><input type="checkbox" id="regTerms"> I agree to the Terms of Use and Privacy Notice.</label>
+                <span class="error">Please accept to continue.</span>
+              </div>
+
+              <button type="submit" class="btn btn-red btn-block" id="registerBtn">📝 Create Account</button>
+            </form>
+
+            <p class="switch">Already have an account? <a href="index.html">Log in</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-logos">
+          <img src="images/logo.png" alt="MDRRMO logo">
+          <img src="images/losbanos.png" alt="Seal of the Municipality of Los Baños">
+          <img class="wide" src="images/bagongpilipinas.png" alt="Bagong Pilipinas">
+        </div>
+        <div class="footer-brand"><strong>MDRRMO<br><small style="font-weight:400">Los Baños, Laguna</small></strong></div>
+        <p>Protecting lives and building resilient communities through disaster risk reduction and management.</p>
+      </div>
+      <div><h4>Services</h4><ul><li>Emergency Response</li><li>First Aid</li><li>Fire Safety</li><li>Rescue & Retrieval Operations</li><li>Seminars for Community Members</li></ul></div>
+      <div><h4>Contact</h4><ul><li>📍Brgy. Timugan, Municipal Hall, Los Baños, Laguna</li><li>🚨 Emergency: <a href="tel:">(0977) 204 9641</a></li><li>✉️ mdrrmo@losbanos.gov.ph</li></ul></div>
+    </div>
+    <div class="footer-bottom">&copy; <span id="year">2026</span> MDRRMO Los Baños, Laguna. All rights reserved.</div>
+  </footer>
+
+  <button id="toTop" aria-label="Back to top">↑</button>
+  <script src="script.js"></script>
+</body>
+</html>

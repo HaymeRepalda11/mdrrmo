@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | MDRRMO Los Baños</title>
+  <link rel="icon" href="images/logo.png" type="image/png">
+  <link rel="stylesheet" href="stylesedit.css">
+  <script>try{var t=localStorage.getItem("mdrrmo-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+</head>
+<body>
+  <div id="progress"></div>
+
+  <div class="topbar">
+    <div class="container">
+      <span><span class="siren">🚨</span> <strong>Emergency Hotline:</strong> <a href="tel:">(0977) 204 9641</a></span>
+      <span>Los Baños, Laguna • Open 24/7</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="homeedit.html" class="brand">
+        <span class="brand-logos">
+          <img class="logo-main" src="images/logo.png" alt="MDRRMO Los Baños logo">
+          <img src="images/losbanos.png" alt="Seal of the Municipality of Los Baños">
+          <img class="wide" src="images/bagongpilipinas.png" alt="Bagong Pilipinas">
+        </span>
+        <div class="brand-text"><strong>MDRRMO</strong><span>Los Baños, Laguna</span></div>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="homeedit.html">Home</a>
+        <a href="aboutedit.html">About Us</a>
+        <a href="servicesedit.html">Services</a>
+        <a href="newsedit.html">News</a>
+        <a href="contactedit.html">Contact Us</a>
+      </nav>
+      <div class="nav-actions">
+       
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero page-hero">
+      <div class="container">
+        <span class="hero-badge">Get in Touch</span>
+        <h1>Contact <span>Us</span></h1>
+        <p>Questions, training requests or feedback? Send us a message.</p>
+        <div class="breadcrumb"><a href="homeedit.html">Home</a> / Contact Us</div>
+      </div>
+      <div class="wave"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,30 C240,70 480,0 720,25 C960,50 1200,10 1440,35 L1440,60 L0,60 Z"/></svg></div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-info reveal left">
+            <h2 style="margin-bottom:1.5rem">We're Ready to Help</h2>
+            <div class="item"><div class="icon">📍</div><div><h4>Office Address</h4><p>Brgy. Timugan, Municipal Hall, Los Baños, Laguna, Philippines<br></p></div></div>
+            <div class="item"><div class="icon">📞</div><div><h4>Phone</h4><p>(0977) 204 9641</p></div></div>
+            <div class="item"><div class="icon">✉️</div><div><h4>Email</h4><p>mdrrmo@losbanos.gov.ph</p></div></div>
+            <div class="item"><div class="icon">🕒</div><div><h4>Office Hours</h4><p>Mon–Fri, 8:00 AM – 5:00 PM<br>Emergency response: 24/7</p></div></div>
+            <div class="hotline-box">
+              <h3>🚨 Emergency Hotline</h3>
+              <div class="big">(0977) 204 9641</div>
+              <p>For life-threatening emergencies, call immediately.</p>
+            </div>
+          </div>
+
+          <form class="card reveal right" id="contactForm" novalidate>
+            <h2 style="margin-bottom:1.3rem">Send a Message</h2>
+            <div class="form-row">
+              <div class="field" data-required>
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" placeholder="Juan Dela Cruz">
+                <span class="error">Please enter your name.</span>
+              </div>
+              <div class="field" data-required>
+                <label for="email">Email *</label>
+                <input type="email" id="email" placeholder="you@example.com">
+                <span class="error">Please enter a valid email.</span>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" placeholder="09XX XXX XXXX">
+              </div>
+              <div class="field" data-required>
+                <label for="topic">Subject *</label>
+                <select id="topic">
+                  <option value="">Select a topic</option>
+                  <option>Training request</option>
+                  <option>Volunteer application</option>
+                  <option>Incident report / feedback</option>
+                  <option>Partnership</option>
+                  <option>Other</option>
+                </select>
+                <span class="error">Please choose a subject.</span>
+              </div>
+            </div>
+            <div class="field" data-required>
+              <label for="message">Message *</label>
+              <textarea id="message" placeholder="How can we help you?"></textarea>
+              <span class="error">Please enter your message.</span>
+            </div>
+            <button type="submit" class="btn btn-red">📨 Send Message</button>
+            <div class="form-success" id="formSuccess">✅ Thank you! Your message was validated.</div>
+          </form>
+        </div>
+
+        
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-logos">
+          <img src="images/logo.png" alt="MDRRMO logo">
+          <img src="images/losbanos.png" alt="Seal of the Municipality of Los Baños">
+          <img class="wide" src="images/bagongpilipinas.png" alt="Bagong Pilipinas">
+        </div>
+        <div class="footer-brand"><strong>MDRRMO<br><small style="font-weight:400">Los Baños, Laguna</small></strong></div>
+        <p>Protecting lives and building resilient communities through disaster risk reduction and management.</p>
+      </div>
+      <div><h4>Services</h4><ul><li>Emergency Response</li><li>First Aid</li><li>Fire Safety</li><li>Rescue & Retrieval Operations</li><li>Seminars for Community Members</li></ul></div>
+      <div><h4>Contact</h4><ul><li>📍 Brgy. Timugan, Municipal Hall, Los Baños, Laguna</li><li>🚨 Emergency: <a href="tel:">(0977) 204 9641</a></li><li>✉️ mdrrmo@losbanos.gov.ph</li></ul></div>
+    </div>
+    <div class="footer-bottom">&copy; <span id="year">2026</span> MDRRMO Los Baños, Laguna. All rights reserved.</div>
+  </footer>
+
+  <button id="toTop" aria-label="Back to top">↑</button>
+  <script src="scriptedit.js"></script>
+</body>
+</html>

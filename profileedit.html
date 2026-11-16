@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile | MDRRMO Los Baños</title>
+  <link rel="icon" href="images/logo.png" type="image/png">
+  <link rel="stylesheet" href="stylesedit.css">
+  <script>try{var t=localStorage.getItem("mdrrmo-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+</head>
+<body>
+  <div id="progress"></div>
+
+  <div class="topbar">
+    <div class="container">
+      <span><span class="siren">🚨</span> <strong>Emergency Hotline:</strong> <a href="tel:">(0977) 204 9641</a></span>
+      <span>Los Baños, Laguna • Open 24/7</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a href="homeedit.html" class="brand">
+        <span class="brand-logos">
+          <img class="images/logo-main" src="images/logo.png" alt="MDRRMO Los Baños logo">
+          <img src="images/losbanos.png" alt="Seal of the Municipality of Los Baños">
+          <img class="wide" src="images/bagongpilipinas.png" alt="Bagong Pilipinas">
+        </span>
+        <div class="brand-text"><strong>MDRRMO</strong><span>Los Baños, Laguna</span></div>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="homeedit.html">Home</a>
+        <a href="aboutedit.html">About Us</a>
+        <a href="servicesedit.html">Services</a>
+        <a href="newsedit.html">News</a>
+        <a href="contactedit.html">Contact Us</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero page-hero">
+      <div class="container">
+        <span class="hero-badge">My Account</span>
+        <h1>My <span>Profile</span></h1>
+        <p>View your personal details, update your information and keep your account secure.</p>
+        <div class="breadcrumb"><a href="homeedit.html">Home</a> / My Profile</div>
+      </div>
+      <div class="wave"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,30 C240,70 480,0 720,25 C960,50 1200,10 1440,35 L1440,60 L0,60 Z"/></svg></div>
+    </section>
+
+    <section class="pf-section">
+      <div class="container pf-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="pf-card pf-side">
+          <div class="pf-avatar" id="pfAvatar" aria-hidden="true">?</div>
+          <h2 id="pfSideName">Loading…</h2>
+          <p class="pf-email" id="pfSideEmail"></p>
+          <span class="pf-badge" id="pfBadge"></span>
+
+          <nav class="pf-menu" aria-label="Profile sections">
+            <button type="button" data-panel="view" class="active">👤 My Details</button>
+            <button type="button" data-panel="edit">✏️ Edit Profile</button>
+            <button type="button" data-panel="password">🔑 Change Password</button>
+          </nav>
+          <button type="button" class="btn btn-outline-dark btn-block" id="pfLogout" onclick="window.location.href='index.html'">🚪 Log Out</button>
+        </aside>
+
+        <!-- MAIN -->
+        <div class="pf-main">
+          <div class="form-alert" id="pfAlert" role="alert" aria-live="polite"></div>
+
+          <!-- VIEW -->
+          <section class="pf-card pf-panel active" id="pf-view">
+            <div class="pf-head">
+              <div><h2>My Details</h2><p>Your personal information on file with MDRRMO Los Baños.</p></div>
+            </div>
+            <dl class="pf-grid">
+              <div class="pf-group">Personal</div>
+              <div class="pf-item wide"><dt>Full Name</dt><dd data-view="name"></dd></div>
+              <div class="pf-item"><dt>Birthday</dt><dd data-view="birthday"></dd></div>
+              <div class="pf-item"><dt>Age</dt><dd data-view="age"></dd></div>
+              <div class="pf-item"><dt>Sex</dt><dd data-view="sex"></dd></div>
+              <div class="pf-item"><dt>Blood Type</dt><dd data-view="blood"></dd></div>
+
+              <div class="pf-group">Contact</div>
+              <div class="pf-item"><dt>Email</dt><dd data-view="email"></dd></div>
+              <div class="pf-item"><dt>Phone Number</dt><dd data-view="phone"></dd></div>
+              <div class="pf-item"><dt>Barangay</dt><dd data-view="barangay"></dd></div>
+              <div class="pf-item"><dt>Member Since</dt><dd data-view="created"></dd></div>
+              <div class="pf-item wide"><dt>Home Address</dt><dd data-view="address"></dd></div>
+
+              <div class="pf-group">Emergency Contact</div>
+              <div class="pf-item"><dt>Contact Person</dt><dd data-view="ecName"></dd></div>
+              <div class="pf-item"><dt>Contact Number</dt><dd data-view="ecPhone"></dd></div>
+            </dl>
+          </section>
+
+          <!-- EDIT -->
+          <form class="pf-card pf-panel" id="pf-edit" novalidate>
+            <div class="pf-head">
+              <div><h2>Edit Profile</h2><p>Update your details, then press Save Changes.</p></div>
+            </div>
+
+            <div class="form-row">
+              <div class="field" id="f-pf-name">
+                <label for="pf-in-name">Full Name</label>
+                <div class="input-wrap"><span class="ico" aria-hidden="true">👤</span>
+                  <input type="text" id="pf-in-name" placeholder="Juan Dela Cruz" autocomplete="name"></div>
+                <span class="error">Please enter your full name.</span>
+              </div>
+              <div class="field">
+                <label for="pf-in-email">Email</label>
+                <div class="input-wrap"><span class="ico" aria-hidden="true">✉️</span>
+                  <input type="email" id="pf-in-email" readonly></div>
+                <span class="hint">Email is your login and can't be changed.</span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field" id="f-pf-birthday">
+                <label for="pf-in-birthday">Birthday</label>
+                <div class="input-wrap"><span class="ico" aria-hidden="true">🎂</span>
+                  <input type="date" id="pf-in-birthday" autocomplete="bday"></div>
+                <span class="error">Enter a valid birthday (not in the future).</span>
+              </div>
+              <div class="field">
+                <label for="pf-in-age">Age</label>
+                <div class="input-wrap"><span class="ico" aria-hidden="true">🔢</span>
+                  <input type="text" id="pf-in-age" readonly placeholder="Calculated from birthday"></div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="pf-in-sex">Sex</label>
+                <div class="input-wrap"><span class="ico" aria-hidden="true">🧑</span>
+                  <select id="pf-in-sex">
+                    <option value="">Prefer not to say</option>
+                    <option>Female</option>
+                    <option>Male</option>
+                  </select></div>
+              </div>
+              <div class="field">
+                <label for="pf-in-blood">Blood Type <small>(optional)</small></label>
+                <div class="input-wrap"><span class="ico" aria-hidden="true">🩸</span>
+                  <select id="pf-in-blood">
+                    <option value="">Unknown</option>
+                    <option>A+</option><option>A-</option>
+                    <option>B+</option><option>B-</option>
+                    <option>AB+</option><option>AB-</option>
+                    <option>O+</option><option>O-</option>
+                  </select></div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field" id="f-pf-phone">
+                <label for="pf-in-phone">Phone Number</label>
+                <div class="input-wrap"><span class="ico" aria-hidden="true">📞</span>
+                  <input type="tel" id="pf-in-phone" placeholder="09XX XXX XXXX" autocomplete="tel"></div>
+                <span class="error">Please enter a valid phone number.</span>
+              </div>
+              <div class="field" id="f-pf-barangay">
+                <label for="pf-in-barangay">Barangay</label>
+                <div class="input-wrap"><span class="ico" aria-hidden="true">📍</span>
+                  <select id="pf-in-barangay">
+                    <option value="">Select your barangay</option>
+                    <option>Anos</option>
+                    <option>Bagong Silang</option>
+                    <option>Bambang</option>
+                    <option>Batong Malake</option>
+                    <option>Baybayin</option>
+                    <option>Bayog</option>
+                    <option>Lalakay</option>
+                    <option>Maahas</option>
+                    <option>Malinta</option>
+                    <option>Mayondon</option>
+                    <option>Putho-Tuntungin</option>
+                    <option>San Antonio</option>
+                    <option>Tadlac</option>
+                    <option>Timugan</option>
+                  </select></div>
+                <span class="error">Please select your barangay.</span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="pf-in-address">Home Address <small>(street / purok / house no.)</small></label>
+              <textarea id="pf-in-address" placeholder="e.g. 123 Rizal St., Purok 2" autocomplete="street-address"></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="pf-in-ecName">Emergency Contact Person</label>
+                <div class="input-wrap"><span class="ico" aria-hidden="true">🆘</span>
+                  <input type="text" id="pf-in-ecName" placeholder="Name of relative or friend"></div>
+              </div>
+              <div class="field" id="f-pf-ecPhone">
+                <label for="pf-in-ecPhone">Emergency Contact Number</label>
+                <div class="input-wrap"><span class="ico" aria-hidden="true">📱</span>
+                  <input type="tel" id="pf-in-ecPhone" placeholder="09XX XXX XXXX"></div>
+                <span class="error">Please enter a valid phone number.</span>
+              </div>
+            </div>
+
+            <div class="pf-actions">
+              <button type="submit" class="btn btn-red" id="pfSaveBtn">
+                <span class="spinner" aria-hidden="true"></span>
+                <span class="btn-label">💾 Save Changes</span>
+              </button>
+              <button type="button" class="btn btn-outline-dark" id="pfCancelEdit">Cancel</button>
+            </div>
+          </form>
+
+          <!-- CHANGE PASSWORD -->
+          <form class="pf-card pf-panel" id="pf-password" novalidate>
+            <div class="pf-head">
+              <div><h2>Change Password</h2><p>Use at least 8 characters with letters and numbers.</p></div>
+            </div>
+
+            <div class="form-alert info" id="pfNoPw">
+              This account was created with Google or Facebook, so it has no password to change here.
+            </div>
+
+            <div id="pwFields">
+              <div class="field" id="f-pw-cur">
+                <label for="pw-current">Current password</label>
+                <div class="input-wrap pw-wrap"><span class="ico" aria-hidden="true">🔒</span>
+                  <input type="password" id="pw-current" placeholder="Enter your current password" autocomplete="current-password">
+                  <button type="button" class="pw-toggle" data-target="pw-current" aria-label="Show password">👁️</button></div>
+                <span class="error">Please enter your current password.</span>
+              </div>
+
+              <div class="field" id="f-pw-new">
+                <label for="pw-new">New password</label>
+                <div class="input-wrap pw-wrap"><span class="ico" aria-hidden="true">🔒</span>
+                  <input type="password" id="pw-new" placeholder="At least 8 characters" autocomplete="new-password">
+                  <button type="button" class="pw-toggle" data-target="pw-new" aria-label="Show password">👁️</button></div>
+                <div class="strength"><div class="strength-bar" id="pwBar"></div></div>
+                <span class="strength-text" id="pwText">Use 8+ characters with letters and numbers.</span>
+                <span class="error">Password needs 8+ characters with letters and numbers.</span>
+              </div>
+
+              <div class="field" id="f-pw-confirm">
+                <label for="pw-confirm">Confirm new password</label>
+                <div class="input-wrap pw-wrap"><span class="ico" aria-hidden="true">🔒</span>
+                  <input type="password" id="pw-confirm" placeholder="Re-enter your new password" autocomplete="new-password">
+                  <button type="button" class="pw-toggle" data-target="pw-confirm" aria-label="Show password">👁️</button></div>
+                <span class="error">Passwords do not match.</span>
+              </div>
+
+              <div class="pf-actions">
+                <button type="submit" class="btn btn-red" id="pwSaveBtn">
+                  <span class="spinner" aria-hidden="true"></span>
+                  <span class="btn-label">🔑 Update Password</span>
+                </button>
+                <button type="button" class="btn btn-outline-dark" id="pfCancelPw">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-logos">
+          <img src="images/logo.png" alt="MDRRMO logo">
+          <img src="images/losbanos.png" alt="Seal of the Municipality of Los Baños">
+          <img class="wide" src="images/bagongpilipinas.png" alt="Bagong Pilipinas">
+        </div>
+        <div class="footer-brand"><strong>MDRRMO<br><small style="font-weight:400">Los Baños, Laguna</small></strong></div>
+        <p>Protecting lives and building resilient communities through disaster risk reduction and management.</p>
+      </div>
+      <div><h4>Services</h4><ul><li>Emergency Response</li><li>First Aid</li><li>Fire Safety</li><li>Rescue & Retrieval Operations</li><li>Seminars for Community Members</li></ul></div>
+      <div><h4>Contact</h4><ul><li>📍Brgy. Timugan, Municipal Hall, Los Baños, Laguna</li><li>🚨 Emergency: <a href="tel:">(0977) 204 9641</a></li><li>✉️ mdrrmo@losbanos.gov.ph</li></ul></div>
+    </div>
+    <div class="footer-bottom">&copy; <span id="year">2026</span> MDRRMO Los Baños, Laguna. All rights reserved.</div>
+  </footer>
+
+  <button id="toTop" aria-label="Back to top">↑</button>
+  <script src="scriptedit.js"></script>
+</body>
+</html>

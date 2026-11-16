@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MDRRMO Los Baños | Admin Dashboard</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="Logo.png" type="image/png">
+  <script>try{var t=localStorage.getItem("mdrrmo-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+  <style>
+    :root{--red:#d62828;--red-dark:#a81c1c;--blue:#1d4ed8;--navy:#0b2a6f;--yellow:#ffc300;
+      --bg:#f7f8fc;--surface:#fff;--text:#16213e;--muted:#5b6785;--border:#e2e6f0;--shadow:0 6px 20px rgba(11,42,111,.10);
+      --ok:#157347;--okbg:#e6f7ee;--errbg:#fde8e8;--warnbg:#fff3c4}
+    [data-theme="dark"]{--bg:#0e1424;--surface:#161e33;--text:#e8ecf8;--muted:#9aa6c7;--border:#26314f;--shadow:0 6px 20px rgba(0,0,0,.4);
+      --okbg:#12301f;--errbg:#3a1717;--warnbg:#3a3213}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+    a{color:var(--blue)}
+    header{background:var(--navy);color:#fff;padding:12px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+    header img{height:40px}
+    header h1{font-size:18px;margin:0;flex:1}
+    header a,header button{color:#fff;background:rgba(255,255,255,.12);border:0;border-radius:8px;padding:8px 12px;font-size:14px;text-decoration:none;cursor:pointer}
+    header a:hover,header button:hover{background:rgba(255,255,255,.22)}
+    main{max-width:1150px;margin:0 auto;padding:20px}
+    nav.tabs{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap}
+    nav.tabs button{background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:999px;padding:9px 18px;font-weight:600;cursor:pointer}
+    nav.tabs button.active{background:var(--red);color:#fff;border-color:var(--red)}
+    .badge{display:inline-block;background:var(--yellow);color:#000;border-radius:999px;font-size:12px;padding:0 8px;margin-left:6px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:18px}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
+    .stat b{display:block;font-size:30px;color:var(--navy)} [data-theme="dark"] .stat b{color:#fff}
+    .stat span{color:var(--muted);font-size:14px}
+    h2{margin:0 0 12px;font-size:18px}
+    .bar{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:14px}
+    .bar i{display:block;height:10px;border-radius:6px;background:var(--blue);min-width:4px}
+    .bar span:first-child{width:130px;flex:none}
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+    input,select,textarea{font:inherit;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 10px}
+    input[type=search]{min-width:240px;flex:1}
+    .btn{border:0;border-radius:8px;padding:8px 14px;font-weight:600;cursor:pointer;background:var(--blue);color:#fff}
+    .btn.red{background:var(--red)} .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+    .btn.sm{padding:5px 10px;font-size:13px} .btn:disabled{opacity:.5;cursor:default}
+    .tablewrap{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;font-size:14px}
+    th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--border);vertical-align:top}
+    th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+    .pill{display:inline-block;border-radius:999px;padding:1px 10px;font-size:12px;font-weight:600}
+    .pill.admin{background:var(--warnbg)} .pill.user{background:var(--border)}
+    .pill.new{background:var(--errbg);color:var(--red)} .pill.read{background:var(--warnbg)} .pill.resolved{background:var(--okbg);color:var(--ok)}
+    .pill.off{background:var(--errbg);color:var(--red)}
+    .pager{display:flex;gap:8px;align-items:center;justify-content:flex-end;margin-top:12px;color:var(--muted);font-size:14px}
+    .msg{border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px;background:var(--surface)}
+    .msg.unread{border-left:5px solid var(--red)}
+    .msg .meta{color:var(--muted);font-size:13px}
+    .msg p{white-space:pre-wrap;margin:8px 0;word-break:break-word}
+    .msg .acts{display:flex;gap:8px;flex-wrap:wrap}
+    .note{padding:10px 12px;border-radius:8px;margin-bottom:12px;font-size:14px}
+    .note.err{background:var(--errbg);color:var(--red)} .note.ok{background:var(--okbg);color:var(--ok)}
+    dialog{border:1px solid var(--border);border-radius:14px;background:var(--surface);color:var(--text);width:min(480px,94vw);padding:20px}
+    dialog::backdrop{background:rgba(0,0,0,.5)}
+    dialog label{display:block;font-weight:600;font-size:13px;margin:10px 0 3px}
+    dialog input,dialog select{width:100%}
+    .row{display:flex;gap:10px} .row>*{flex:1}
+    .empty{color:var(--muted);padding:20px;text-align:center}
+    [hidden]{display:none!important}
+  </style>
+</head>
+<body>
+<header>
+  <img src="images/Logo.png" alt="MDRRMO logo">
+  <h1>MDRRMO Los Baños – Admin Dashboard</h1>
+  <a href="homeedit.html" class="back-homeedit" aria-label="Go back to Home Editor">← Back to Home Editor</a>
+  <button id="logoutBtn" type="button">Log out</button>
+</header>
+
+<main id="app" hidden>
+  <nav class="tabs" aria-label="Dashboard sections">
+    <button type="button" data-tab="overview" class="active">📊 Overview</button>
+    <button type="button" data-tab="users">👥 Accounts</button>
+    <button type="button" data-tab="messages">📨 Messages<span class="badge" id="newBadge" hidden>0</span></button>
+  </nav>
+  <div id="note" class="note" hidden></div>
+
+  <!-- Overview -->
+  <section id="tab-overview">
+    <div class="grid" id="stats"></div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+      <div class="card"><h2>Accounts by barangay</h2><div id="brgyBars"></div></div>
+      <div class="card"><h2>Newest accounts</h2><div id="recentUsers"></div></div>
+      <div class="card"><h2>Latest messages</h2><div id="recentMsgs"></div></div>
+    </div>
+  </section>
+
+  <!-- Accounts -->
+  <section id="tab-users" hidden>
+    <div class="toolbar">
+      <input type="search" id="uq" placeholder="Search name, email, barangay, phone…" aria-label="Search accounts">
+      <select id="urole" aria-label="Filter by role"><option value="">All roles</option><option value="user">Residents</option><option value="admin">Administrators</option></select>
+      <a class="btn ghost" id="exportCsv" href="api/admin_users.php?export=csv">⬇️ Export CSV</a>
+    </div>
+    <div class="card tablewrap"><table>
+      <thead><tr><th>Name</th><th>Email / phone</th><th>Barangay</th><th>Role</th><th>Joined</th><th></th></tr></thead>
+      <tbody id="ubody"></tbody>
+    </table><div class="empty" id="uempty" hidden>No accounts found.</div></div>
+    <div class="pager"><span id="uinfo"></span><button class="btn ghost sm" id="uprev" type="button">← Prev</button><button class="btn ghost sm" id="unext" type="button">Next →</button></div>
+  </section>
+
+  <!-- Messages -->
+  <section id="tab-messages" hidden>
+    <div class="toolbar">
+      <input type="search" id="mq" placeholder="Search messages…" aria-label="Search messages">
+      <select id="mstatus" aria-label="Filter by status"><option value="">All</option><option value="new">New</option><option value="read">Read</option><option value="resolved">Resolved</option></select>
+    </div>
+    <div id="mlist"></div>
+    <div class="empty" id="mempty" hidden>No messages.</div>
+    <div class="pager"><span id="minfo"></span><button class="btn ghost sm" id="mprev" type="button">← Prev</button><button class="btn ghost sm" id="mnext" type="button">Next →</button></div>
+  </section>
+</main>
+
+<dialog id="editDlg">
+  <form method="dialog" id="editForm">
+    <h2>Edit account</h2>
+    <div class="note err" id="editErr" hidden></div>
+    <label>Name</label><input id="e-name" required minlength="2" maxlength="120">
+    <label>Email (can't be changed)</label><input id="e-email" disabled>
+    <div class="row"><div><label>Phone</label><input id="e-phone" maxlength="20"></div><div><label>Barangay</label><input id="e-brgy" maxlength="60"></div></div>
+    <label>Address</label><input id="e-addr" maxlength="255">
+    <div class="row"><div><label>Role</label><select id="e-role"><option value="user">Resident</option><option value="admin">Administrator</option></select></div>
+    <div><label>Status</label><select id="e-active"><option value="1">Active</option><option value="0">Disabled (can't log in)</option></select></div></div>
+    <label>Set a new password <small>(optional)</small></label><input id="e-pw" type="password" autocomplete="new-password" placeholder="Leave blank to keep the current one">
+    <div class="row" style="margin-top:16px;justify-content:space-between">
+      <button type="button" class="btn red" id="e-del" style="flex:none">🗑 Delete</button>
+      <span style="flex:1"></span>
+      <button type="button" class="btn ghost" id="e-cancel" style="flex:none">Cancel</button>
+      <button type="submit" class="btn" id="e-save" style="flex:none">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+(function () {
+  "use strict";
+  var API = "api/", csrf = "";
+  function $(id) { return document.getElementById(id); }
+
+  function call(method, path, data) {
+    var o = { method: method, credentials: "same-origin", headers: { "Accept": "application/json" } };
+    if (method !== "GET") { o.headers["Content-Type"] = "application/json"; o.headers["X-CSRF-Token"] = csrf; o.body = JSON.stringify(data || {}); }
+    return fetch(API + path, o).then(function (r) {
+      return r.text().then(function (t) {
+        var j = null; try { j = JSON.parse(t); } catch (e) {}
+        if (!j) throw new Error("The server did not answer correctly. Open this page through XAMPP (http://localhost/mdrrmo/admin.html).");
+        if (!j.ok) { var er = new Error(j.error || "Something went wrong."); er.status = r.status; throw er; }
+        return j;
+      });
+    }, function () { throw new Error("Can't reach the server. Is Apache/MySQL running in XAMPP?"); });
+  }
+
+  /* tiny DOM builder – everything is inserted as text, never as HTML */
+  function h(tag, attrs, kids) {
+    var el = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (k) {
+      if (k === "class") el.className = attrs[k]; else if (k === "text") el.textContent = attrs[k];
+      else if (k.slice(0, 2) === "on") el.addEventListener(k.slice(2), attrs[k]); else el.setAttribute(k, attrs[k]);
+    });
+    (kids || []).forEach(function (c) { if (c != null) el.appendChild(typeof c === "string" ? document.createTextNode(c) : c); });
+    return el;
+  }
+  function clear(el) { while (el.firstChild) el.removeChild(el.firstChild); }
+  function fmt(s) { if (!s) return "—"; var d = new Date(String(s).replace(" ", "T")); return isNaN(d) ? s : d.toLocaleString("en-PH", { dateStyle: "medium", timeStyle: "short" }); }
+  var noteTimer;
+  function note(msg, type) { var n = $("note"); n.textContent = msg; n.className = "note " + (type || "ok"); n.hidden = false; clearTimeout(noteTimer); noteTimer = setTimeout(function () { n.hidden = true; }, 5000); }
+  function fail(e) { note(e.message || "Something went wrong.", "err"); }
+
+  /* ---------- start: must be an administrator ---------- */
+  call("GET", "me.php").then(function (j) {
+    csrf = j.csrf;
+    if (!j.user) { location.replace("index.html"); return; }
+    if (j.user.role !== "admin") { location.replace("home.html"); return; }
+    $("app").hidden = false;
+    loadStats();
+  }).catch(function (e) { document.body.appendChild(h("p", { class: "note err", text: e.message })); });
+
+  $("logoutBtn").addEventListener("click", function () {
+    call("POST", "logout.php").catch(function () {}).then(function () { location.href = "home.html"; });
+  });
+
+  /* ---------- tabs ---------- */
+  var loaded = {};
+  document.querySelectorAll("nav.tabs button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var t = b.getAttribute("data-tab");
+      document.querySelectorAll("nav.tabs button").forEach(function (x) { x.classList.toggle("active", x === b); });
+      ["overview", "users", "messages"].forEach(function (n) { $("tab-" + n).hidden = n !== t; });
+      if (t === "overview") loadStats();
+      if (t === "users" && !loaded.users) { loaded.users = true; loadUsers(); }
+      if (t === "messages" && !loaded.messages) { loaded.messages = true; loadMsgs(); }
+    });
+  });
+
+  /* ---------- overview ---------- */
+  function loadStats() {
+    call("GET", "admin_stats.php").then(function (s) {
+      var st = $("stats"); clear(st);
+      [["Accounts", s.users], ["New this week", s.newUsers7d], ["Administrators", s.admins], ["Messages", s.messages], ["Unread messages", s.messagesNew]].forEach(function (x) {
+        st.appendChild(h("div", { class: "card stat" }, [h("b", { text: String(x[1]) }), h("span", { text: x[0] })]));
+      });
+      $("newBadge").textContent = s.messagesNew; $("newBadge").hidden = !s.messagesNew;
+
+      var bb = $("brgyBars"); clear(bb);
+      var max = Math.max.apply(null, s.byBarangay.map(function (b) { return +b.total; }).concat([1]));
+      if (!s.byBarangay.length) bb.appendChild(h("div", { class: "empty", text: "No accounts yet." }));
+      s.byBarangay.forEach(function (b) {
+        var bar = h("i"); bar.style.width = Math.max(3, (b.total / max) * 100) + "%";
+        bb.appendChild(h("div", { class: "bar" }, [h("span", { text: b.name }), bar, h("span", { text: String(b.total) })]));
+      });
+      var ru = $("recentUsers"); clear(ru);
+      if (!s.recentUsers.length) ru.appendChild(h("div", { class: "empty", text: "No accounts yet." }));
+      s.recentUsers.forEach(function (u) { ru.appendChild(h("div", { class: "bar" }, [h("span", { text: u.name }), h("span", { text: fmt(u.created_at) })])); });
+      var rm = $("recentMsgs"); clear(rm);
+      if (!s.recentMessages.length) rm.appendChild(h("div", { class: "empty", text: "No messages yet." }));
+      s.recentMessages.forEach(function (m) { rm.appendChild(h("div", { class: "bar" }, [h("span", { text: m.name }), h("span", { class: "pill " + m.status, text: m.topic })])); });
+    }).catch(fail);
+  }
+
+  /* ---------- accounts ---------- */
+  var up = 1, uTimer, current = null, meId = 0;
+  function loadUsers() {
+    var q = $("uq").value.trim(), role = $("urole").value;
+    var qs = "q=" + encodeURIComponent(q) + "&role=" + role;
+    $("exportCsv").href = API + "admin_users.php?export=csv&" + qs;
+    call("GET", "admin_users.php?" + qs + "&page=" + up).then(function (j) {
+      meId = j.meId;
+      var tb = $("ubody"); clear(tb);
+      $("uempty").hidden = j.users.length > 0;
+      j.users.forEach(function (u) {
+        var name = [h("strong", { text: u.name })];
+        if (!+u.is_active) name.push(" ", h("span", { class: "pill off", text: "disabled" }));
+        tb.appendChild(h("tr", {}, [
+          h("td", {}, name),
+          h("td", {}, [u.email, h("br"), h("small", { text: u.phone || "" })]),
+          h("td", { text: u.barangay || "—" }),
+          h("td", {}, [h("span", { class: "pill " + u.role, text: u.role === "admin" ? "Admin" : "Resident" })]),
+          h("td", { text: fmt(u.created_at) }),
+          h("td", {}, [h("button", { class: "btn sm", type: "button", text: "Edit", onclick: function () { openEdit(u); } })])
+        ]));
+      });
+      var from = j.total ? (j.page - 1) * j.per + 1 : 0, to = Math.min(j.total, j.page * j.per);
+      $("uinfo").textContent = from + "–" + to + " of " + j.total;
+      $("uprev").disabled = j.page <= 1; $("unext").disabled = to >= j.total;
+    }).catch(fail);
+  }
+  $("uq").addEventListener("input", function () { clearTimeout(uTimer); uTimer = setTimeout(function () { up = 1; loadUsers(); }, 300); });
+  $("urole").addEventListener("change", function () { up = 1; loadUsers(); });
+  $("uprev").addEventListener("click", function () { up--; loadUsers(); });
+  $("unext").addEventListener("click", function () { up++; loadUsers(); });
+
+  function openEdit(u) {
+    current = u;
+    $("editErr").hidden = true;
+    $("e-name").value = u.name; $("e-email").value = u.email; $("e-phone").value = u.phone || "";
+    $("e-brgy").value = u.barangay || ""; $("e-addr").value = u.address || "";
+    $("e-role").value = u.role; $("e-active").value = String(+u.is_active); $("e-pw").value = "";
+    var self = +u.id === meId;
+    $("e-role").disabled = self; $("e-active").disabled = self; $("e-del").hidden = self;
+    $("editDlg").showModal();
+  }
+  function editErr(e) { $("editErr").textContent = e.message; $("editErr").hidden = false; }
+  $("e-cancel").addEventListener("click", function () { $("editDlg").close(); });
+  $("editForm").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var id = +current.id, pw = $("e-pw").value;
+    call("POST", "admin_users.php", {
+      action: "update", id: id, name: $("e-name").value, phone: $("e-phone").value, barangay: $("e-brgy").value,
+      address: $("e-addr").value, role: $("e-role").value, is_active: $("e-active").value === "1"
+    }).then(function () {
+      return pw ? call("POST", "admin_users.php", { action: "set_password", id: id, password: pw }) : null;
+    }).then(function () { $("editDlg").close(); note("Account saved."); loadUsers(); }).catch(editErr);
+  });
+  $("e-del").addEventListener("click", function () {
+    if (!confirm("Permanently delete " + current.name + "'s account? This can't be undone.")) return;
+    call("POST", "admin_users.php", { action: "delete", id: +current.id }).then(function () {
+      $("editDlg").close(); note("Account deleted."); loadUsers();
+    }).catch(editErr);
+  });
+
+  /* ---------- messages ---------- */
+  var mp = 1, mTimer;
+  function loadMsgs() {
+    call("GET", "admin_messages.php?status=" + $("mstatus").value + "&q=" + encodeURIComponent($("mq").value.trim()) + "&page=" + mp).then(function (j) {
+      var list = $("mlist"); clear(list);
+      $("mempty").hidden = j.messages.length > 0;
+      j.messages.forEach(function (m) {
+        function setStatus(s) { return function () { call("POST", "admin_messages.php", { action: "status", id: +m.id, status: s }).then(function () { loadMsgs(); loadStats(); }).catch(fail); }; }
+        var acts = h("div", { class: "acts" }, [
+          m.status !== "read" ? h("button", { class: "btn ghost sm", type: "button", text: "Mark read", onclick: setStatus("read") }) : null,
+          m.status !== "resolved" ? h("button", { class: "btn sm", type: "button", text: "✓ Resolved", onclick: setStatus("resolved") }) : null,
+          m.status !== "new" ? h("button", { class: "btn ghost sm", type: "button", text: "Mark unread", onclick: setStatus("new") }) : null,
+          h("a", { class: "btn ghost sm", href: "mailto:" + encodeURIComponent(m.email).replace(/%40/g, "@") + "?subject=" + encodeURIComponent("Re: " + m.topic), text: "✉️ Reply" }),
+          h("button", { class: "btn red sm", type: "button", text: "Delete", onclick: function () {
+            if (confirm("Delete this message?")) call("POST", "admin_messages.php", { action: "delete", id: +m.id }).then(function () { loadMsgs(); loadStats(); }).catch(fail);
+          } })
+        ]);
+        list.appendChild(h("div", { class: "msg" + (m.status === "new" ? " unread" : "") }, [
+          h("div", {}, [h("strong", { text: m.name }), " ", h("span", { class: "pill " + m.status, text: m.status }), " ", h("span", { class: "pill user", text: m.topic })]),
+          h("div", { class: "meta", text: m.email + (m.phone ? " • " + m.phone : "") + " • " + fmt(m.created_at) }),
+          h("p", { text: m.message }),
+          acts
+        ]));
+      });
+      var from = j.total ? (j.page - 1) * j.per + 1 : 0, to = Math.min(j.total, j.page * j.per);
+      $("minfo").textContent = from + "–" + to + " of " + j.total;
+      $("mprev").disabled = j.page <= 1; $("mnext").disabled = to >= j.total;
+    }).catch(fail);
+  }
+  $("mq").addEventListener("input", function () { clearTimeout(mTimer); mTimer = setTimeout(function () { mp = 1; loadMsgs(); }, 300); });
+  $("mstatus").addEventListener("change", function () { mp = 1; loadMsgs(); });
+  $("mprev").addEventListener("click", function () { mp--; loadMsgs(); });
+  $("mnext").addEventListener("click", function () { mp++; loadMsgs(); });
+})();
+</script>
+</body>
+</html>

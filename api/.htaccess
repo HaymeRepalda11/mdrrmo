@@ -1,0 +1,5 @@
+# Block direct browsing of internal files
+<FilesMatch "^(config|_bootstrap)\.php$">
+  Require all denied
+</FilesMatch>
+Options -Indexes

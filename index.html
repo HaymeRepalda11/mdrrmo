@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In | MDRRMO Los Baños</title>
+  <link rel="icon" href="images/logo.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+  <script>try{var t=localStorage.getItem("mdrrmo-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+</head>
+<body class="login-page">
+  <div id="progress"></div>
+
+  <div class="topbar">
+    <div class="container">
+      <span><span class="siren">🚨</span> <strong>Emergency Hotline:</strong> <a href="tel:">(0977) 204 9641</a></span>
+      <span>Los Baños, Laguna • Open 24/7</span>
+    </div>
+  </div>
+
+  <main>
+    <section class="auth-section">
+      <div class="blob blob-1" aria-hidden="true"></div>
+      <div class="blob blob-2" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="auth-card login-card">
+
+          <!-- Left panel -->
+          <aside class="auth-side">
+            <div class="beacon" aria-hidden="true">
+              <span class="ring"></span><span class="ring"></span><span class="ring"></span>
+              <span class="dash"></span>
+              <img src="images/logo.png" alt="">
+            </div>
+            <h2>Welcome back</h2>
+            <p>Log in to stay connected with MDRRMO Los Baños.</p>
+            <ul>
+              <li>📢 Get advisories and updates</li>
+              <li>🎓 Join trainings and drills</li>
+              <li>🤝 Volunteer with your barangay</li>
+            </ul>
+          </aside>
+
+          <!-- Right panel -->
+          <div class="auth-form">
+            <h1 class="stagger" style="--i:0">Log In</h1>
+            <p class="sub stagger" style="--i:1">Enter your account details to continue.</p>
+
+            <div class="form-alert" id="loginAlert" role="alert" aria-live="polite"></div>
+
+            <form id="loginForm" novalidate>
+              <div class="field stagger" id="f-email" style="--i:2">
+                <label for="loginEmail">Email</label>
+                <div class="input-wrap">
+                  <span class="ico" aria-hidden="true">✉️</span>
+                  <input type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email">
+                </div>
+                <span class="error">Please enter a valid email address.</span>
+              </div>
+
+              <div class="field stagger" id="f-password" style="--i:3">
+                <label for="loginPassword">Password</label>
+                <div class="input-wrap pw-wrap">
+                  <span class="ico" aria-hidden="true">🔒</span>
+                  <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="current-password">
+                  <button type="button" class="pw-toggle" data-target="loginPassword" aria-label="Show password">👁️</button>
+                </div>
+                <span class="error">Please enter your password.</span>
+                <span class="caps-hint" id="capsHint">⚠️ Caps Lock is on</span>
+              </div>
+
+              <div class="form-meta stagger" style="--i:4">
+                <label class="check-row"><input type="checkbox" id="remember"> Keep me logged in</label>
+                <a href="forgot-password.html">Forgot password?</a>
+              </div>
+
+              <button type="submit" class="btn btn-red btn-block stagger" id="loginBtn" style="--i:5">
+                <span class="spinner" aria-hidden="true"></span>
+                <span class="btn-label">🔐 Log In</span>
+              </button>
+            </form>
+
+            <p class="switch stagger" style="--i:7">Don't have an account? <a href="register.html">Create one</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Success overlay -->
+    <div class="login-success" id="loginSuccess" aria-hidden="true">
+      <div class="box">
+        <svg class="check-svg" viewBox="0 0 52 52" aria-hidden="true">
+          <circle class="c" cx="26" cy="26" r="25" fill="none"/>
+          <path class="t" fill="none" d="M14 27l8 8 16-17"/>
+        </svg>
+        <h2>Welcome back, <span class="who"></span>!</h2>
+        <p>Taking you to the homepage…</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-logos">
+          <img src="images/logo.png" alt="MDRRMO logo">
+          <img src="images/losbanos.png" alt="Seal of the Municipality of Los Baños">
+          <img class="wide" src="images/bagongpilipinas.png" alt="Bagong Pilipinas">
+        </div>
+        <div class="footer-brand"><strong>MDRRMO<br><small style="font-weight:400">Los Baños, Laguna</small></strong></div>
+        <p>Protecting lives and building resilient communities through disaster risk reduction and management.</p>
+      </div>
+      <div><h4>Services</h4><ul><li>Emergency Response</li><li>First Aid</li><li>Fire Safety</li><li>Rescue & Retrieval Operations</li><li>Seminars for Community Members</li></ul></div>
+      <div><h4>Contact</h4><ul><li>📍Brgy. Timugan, Municipal Hall, Los Baños, Laguna</li><li>🚨 Emergency: <a href="tel:">(0977) 204 9641</a></li><li>✉️ mdrrmo@losbanos.gov.ph</li></ul></div>
+    </div>
+    <div class="footer-bottom">&copy; <span id="year">2026</span> MDRRMO Los Baños, Laguna. All rights reserved.</div>
+  </footer>
+
+  <button id="toTop" aria-label="Back to top">↑</button>
+  <script src="script.js"></script>
+</body>
+</html>
