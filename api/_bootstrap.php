@@ -223,11 +223,21 @@ function mail_is_configured() {
     return SMTP_PASS !== '' && strpos(SMTP_PASS, 'PASTE_') !== 0;
 }
 
+/* The reason the last send_mail() call failed ('' if it did not fail).
+   Only ever shown to visitors when APP_ENV is "dev". */
+function mail_last_error($set = null) {
+    static $err = '';
+    if ($set !== null) $err = $set;
+    return $err;
+}
+
 /* Sends an email through Gmail SMTP (PHPMailer). Returns true/false.
    $text is the plain-text body; $html (optional) is an HTML version.
    Failures are written to the PHP error log, never shown to the visitor. */
 function send_mail($to, $subject, $text, $html = null) {
+    mail_last_error('');
     if (!mail_is_configured()) {
+        mail_last_error('SMTP_PASS is not set. Create api/config.local.php (copy config.local.example.php) and put your Gmail App Password in it.');
         error_log('[mdrrmo] mail not sent: SMTP_PASS is not set (see api/config.local.example.php)');
         return false;
     }
@@ -264,7 +274,9 @@ function send_mail($to, $subject, $text, $html = null) {
         $mail->send();
         return true;
     } catch (\Throwable $e) {
-        error_log('[mdrrmo] mail error: ' . ($mail->ErrorInfo !== '' ? $mail->ErrorInfo : $e->getMessage()));
+        $why = $mail->ErrorInfo !== '' ? $mail->ErrorInfo : $e->getMessage();
+        mail_last_error($why);
+        error_log('[mdrrmo] mail error: ' . $why);
         return false;
     }
 }

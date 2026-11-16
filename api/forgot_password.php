@@ -53,9 +53,17 @@ if ($user && (int)$user['is_active']) {
             }
             /* dev: keep working without a mail server – the code is shown on the page below */
             $resp['mailError'] = true;
+            $resp['devNote'] = 'The email could NOT be sent: ' . mail_last_error();
+        } elseif (APP_ENV === 'dev') {
+            $resp['devNote'] = 'The email was accepted by the mail server for ' . $email . '. If it is not in the inbox, check Spam.';
         }
 
         if (APP_ENV === 'dev') $resp['devCode'] = $code;   // dev only
+    } elseif (APP_ENV === 'dev') {
+        $resp['devNote'] = 'Too many requests for this account in 15 minutes, so no email was sent. Wait a few minutes.';
     }
+} elseif (APP_ENV === 'dev') {
+    /* dev only: in prod the answer is identical for every address, so accounts can't be probed */
+    $resp['devNote'] = 'No active account is registered with ' . $email . ', so no email was sent. Register this email first, or use the email of an existing account.';
 }
 ok($resp);

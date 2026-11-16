@@ -520,8 +520,10 @@ MDRRMO.capturePristine();
           return MDRRMO.post("forgot_password.php", { email: email }).then(function (j) {
             if (demoBox) {
               /* The code is only shown on the page in dev mode (api/config.php); in prod it is emailed only */
-              demoBox.style.display = j.devCode ? "" : "none";
-              if (j.devCode) document.getElementById("demoCodeValue").textContent = j.devCode;
+              demoBox.style.display = (j.devCode || j.devNote) ? "" : "none";
+              document.getElementById("demoCodeValue").textContent = j.devCode || "------";
+              var noteEl = document.getElementById("demoNote");
+              if (noteEl) noteEl.textContent = j.devNote || "";
             }
             startCooldown(30);
             return j;
