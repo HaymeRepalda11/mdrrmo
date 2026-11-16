@@ -43,10 +43,10 @@ HOW IT WORKS
                (the page is restored from the database each time it loads). "Reset" restores
                the original page. The last 20 versions of each section are kept in the table
                page_content_history.
-  Forgot       The user gets a 6-digit code that lasts 10 minutes (5 wrong tries max).
-  password     XAMPP has no mail server by default, so while APP_ENV is "dev"
-               (api\config.php) the code is shown on the page instead of being emailed.
-               See "Sending real emails" below, then set APP_ENV to "prod".
+  Forgot       The user gets a 6-digit code by email that lasts 10 minutes (5 wrong tries max).
+  password     While APP_ENV is "dev" (api\config.php) the code is ALSO shown on the page so you
+               can test without email. Set APP_ENV to "prod" for the real site: the code is then
+               emailed only. See "Sending real emails" below.
 
 SECURITY NOTES
   - Passwords are hashed on the server (bcrypt via password_hash). Nothing sensitive is kept in the browser.
@@ -59,14 +59,27 @@ SECURITY NOTES
   - Before going public: use HTTPS, set APP_ENV to "prod", delete api\setup_admin.php,
     and give MySQL's root user a password (or create a separate MySQL user for this site).
 
-SENDING REAL EMAILS (optional)
-  Gmail via XAMPP's sendmail:
-    1) C:\xampp\sendmail\sendmail.ini  -> smtp_server=smtp.gmail.com, smtp_port=587,
-       auth_username=<your gmail>, auth_password=<Google "App password">, force_sender=<your gmail>
-    2) C:\xampp\php\php.ini  -> sendmail_path = "\"C:\xampp\sendmail\sendmail.exe\" -t"
-    3) Restart Apache. Set MAIL_FROM (and CONTACT_NOTIFY_TO for new-message alerts) in api\config.php.
+SENDING REAL EMAILS (forgot-password code, contact notifications)
+  The site sends mail with the bundled PHPMailer through Gmail SMTP. No XAMPP sendmail setup needed.
+    1) Gmail account that SENDS the mail (default mdrrmolb@gmail.com): turn on 2-Step Verification.
+    2) Google Account -> Security -> App passwords -> create one (16 letters).
+    3) Copy api\config.local.example.php to api\config.local.php and put the app password in
+       SMTP_PASS (no spaces). config.local.php is git-ignored so the password never goes to GitHub.
+       (Never put your normal Gmail password here.)
+    4) In C:\xampp\php\php.ini make sure   extension=openssl   is enabled (no ";" in front), then restart Apache.
+    5) Test: Forgot password -> enter a registered email -> the code should arrive within a minute.
+       Check Spam if it doesn't.
+    6) Before going public add   define('APP_ENV', 'prod');   to api\config.local.php.
+  If the email can't be sent, in "prod" the visitor sees "We couldn't send the email right now" and the
+  real reason is written to the PHP error log (in "dev" the SMTP conversation is logged too).
+  Optional: define('CONTACT_NOTIFY_TO', 'you@gmail.com'); in config.local.php to get an email for each new
+  Contact Us message.
 
 TROUBLESHOOTING
+  Code email doesn't arrive
+        -> Look in the PHP error log first. "SMTP_PASS is not set" = step 3 above; "Could not authenticate"
+           = wrong app password or 2-Step Verification is off; "Could not connect"/timeout = openssl not
+           enabled, or the network blocks port 587; also check the Spam folder.
   "Can't reach the server" / "did not answer correctly"
         -> Apache/MySQL not running, or the page was opened as a file. Use http://localhost/mdrrmo/
   "Cannot connect to the database"

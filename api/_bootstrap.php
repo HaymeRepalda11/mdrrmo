@@ -218,27 +218,53 @@ require_once __DIR__ . '/../PHPmailer/src/Exception.php';
 require_once __DIR__ . '/../PHPmailer/src/PHPMailer.php';
 require_once __DIR__ . '/../PHPmailer/src/SMTP.php';
 
-/* Sends a plain-text email through Gmail SMTP. Returns true/false. */
-function send_mail($to, $subject, $text) {
+/* True when the SMTP app password was never filled in. */
+function mail_is_configured() {
+    return SMTP_PASS !== '' && strpos(SMTP_PASS, 'PASTE_') !== 0;
+}
+
+/* Sends an email through Gmail SMTP (PHPMailer). Returns true/false.
+   $text is the plain-text body; $html (optional) is an HTML version.
+   Failures are written to the PHP error log, never shown to the visitor. */
+function send_mail($to, $subject, $text, $html = null) {
+    if (!mail_is_configured()) {
+        error_log('[mdrrmo] mail not sent: SMTP_PASS is not set (see api/config.local.example.php)');
+        return false;
+    }
     $mail = new PHPMailer(true);
     try {
         $mail->isSMTP();
         $mail->Host       = SMTP_HOST;
-        $mail->SMTPAuth   = true;
+        $mail->SMTPAuth   = defined('SMTP_AUTH') ? (bool)SMTP_AUTH : true;
         $mail->Username   = SMTP_USER;
         $mail->Password   = SMTP_PASS;
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $secure           = defined('SMTP_SECURE') ? SMTP_SECURE : PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->SMTPSecure = $secure;
+        $mail->SMTPAutoTLS = $secure !== '';
         $mail->Port       = SMTP_PORT;
+        $mail->Timeout    = SMTP_TIMEOUT;
         $mail->CharSet    = 'UTF-8';
+
+        /* In dev only, log the SMTP conversation to the PHP error log (PHPMailer hides the credentials) */
+        if (APP_ENV === 'dev') {
+            $mail->SMTPDebug   = 2;
+            $mail->Debugoutput = function ($str, $level) { error_log('[mdrrmo smtp] ' . trim($str)); };
+        }
 
         $mail->setFrom(MAIL_FROM, SMTP_FROM_NAME);
         $mail->addAddress($to);
         $mail->Subject = $subject;
-        $mail->Body    = $text;
+        if ($html !== null) {
+            $mail->isHTML(true);
+            $mail->Body    = $html;
+            $mail->AltBody = $text;
+        } else {
+            $mail->Body = $text;
+        }
         $mail->send();
         return true;
-    } catch (MailException $e) {
-        error_log('[mdrrmo] mail error: ' . $mail->ErrorInfo);
+    } catch (\Throwable $e) {
+        error_log('[mdrrmo] mail error: ' . ($mail->ErrorInfo !== '' ? $mail->ErrorInfo : $e->getMessage()));
         return false;
     }
 }

@@ -1,0 +1,10 @@
+# Local secrets – never commit
+api/config.local.php
+
+# PHP session files (created at runtime)
+api/_sessions/sess_*
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/

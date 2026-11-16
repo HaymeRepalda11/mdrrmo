@@ -519,7 +519,7 @@ MDRRMO.capturePristine();
         function requestCode(email) {
           return MDRRMO.post("forgot_password.php", { email: email }).then(function (j) {
             if (demoBox) {
-              /* The code is only shown on the page in dev mode (api/config.php) because XAMPP has no mail server by default */
+              /* The code is only shown on the page in dev mode (api/config.php); in prod it is emailed only */
               demoBox.style.display = j.devCode ? "" : "none";
               if (j.devCode) document.getElementById("demoCodeValue").textContent = j.devCode;
             }
@@ -575,7 +575,7 @@ MDRRMO.capturePristine();
         resendBtn.addEventListener("click", function () {
           codeInput.value = ""; setErr("f-code", false);
           requestCode(resetEmail).then(function () {
-            showAlert(rAlert, "A new code has been generated.", "ok");
+            showAlert(rAlert, "A new code has been sent to your email.", "ok");
           }).catch(function (err) { showAlert(rAlert, err.message, "err"); });
         });
         document.getElementById("changeEmailBtn").addEventListener("click", function () {
