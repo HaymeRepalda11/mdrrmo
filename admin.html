@@ -296,7 +296,15 @@
           m.status !== "read" ? h("button", { class: "btn ghost sm", type: "button", text: "Mark read", onclick: setStatus("read") }) : null,
           m.status !== "resolved" ? h("button", { class: "btn sm", type: "button", text: "✓ Resolved", onclick: setStatus("resolved") }) : null,
           m.status !== "new" ? h("button", { class: "btn ghost sm", type: "button", text: "Mark unread", onclick: setStatus("new") }) : null,
-          h("a", { class: "btn ghost sm", href: "mailto:" + encodeURIComponent(m.email).replace(/%40/g, "@") + "?subject=" + encodeURIComponent("Re: " + m.topic), text: "✉️ Reply" }),
+          h("a", {
+    class: "btn ghost sm",
+    href: "https://mail.google.com/mail/?view=cm&fs=1&to=" +
+          encodeURIComponent(m.email) +
+          "&su=" + encodeURIComponent("Re: " + m.topic),
+    target: "_blank",
+    rel: "noopener noreferrer",
+    text: "✉️ Reply"
+}),
           h("button", { class: "btn red sm", type: "button", text: "Delete", onclick: function () {
             if (confirm("Delete this message?")) call("POST", "admin_messages.php", { action: "delete", id: +m.id }).then(function () { loadMsgs(); loadStats(); }).catch(fail);
           } })
