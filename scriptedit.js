@@ -687,6 +687,19 @@ if (session) {
             })
             .catch(function (err) {
               setLoading(false);
+              if (err.data && err.data.code === "not_registered") {
+                /* email detector: the address has no account yet */
+                setErr("f-email", true);
+                var emsg = document.querySelector("#f-email .error");
+                if (emsg) emsg.textContent = "This email is not yet registered.";
+                loginAlertBox.innerHTML = "⚠️ This email is not yet registered. <a href=\"register.html\">Create an account</a> to continue.";
+                loginAlertBox.className = "form-alert show err";
+                shakeForm();
+                emailInput.focus();
+                return;
+              }
+              var emsg2 = document.querySelector("#f-email .error");
+              if (emsg2) emsg2.textContent = "Please enter a valid email address.";
               showAlert(loginAlertBox, err.message || "Incorrect email or password.", "err");
               shakeForm();
               passInput.select();

@@ -30,7 +30,12 @@ $user = $st->fetch();
 $good = password_verify($password, $user ? $user['password_hash'] : DUMMY_HASH);
 $log = $pdo->prepare('INSERT INTO login_attempts (email, ip, success) VALUES (?,?,?)');
 
-if (!$user || !$good) {
+if (!$user) {
+    /* email is not registered – still counted as a failed attempt so it stays rate-limited */
+    $log->execute([$email, $ip, 0]);
+    fail('This email is not yet registered. Please create an account first.', 401, ['code' => 'not_registered']);
+}
+if (!$good) {
     $log->execute([$email, $ip, 0]);
     fail('Incorrect email or password.', 401);
 }
